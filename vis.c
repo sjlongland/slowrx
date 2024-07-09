@@ -20,10 +20,10 @@
 
 TextStatusCallback OnVisStatusChange;
 EventCallback OnVisIdentified;
-EventCallback OnVisPowerComputed;
+UpdateVUCallback OnVisPowerComputed;
 int VIS;
 gboolean VisAutoStart;
-double VisPower[2048] = {0};
+static double VisPower[2048] = {0};
 
 guchar GetVIS () {
 
@@ -160,7 +160,7 @@ guchar GetVIS () {
 
     if (++ptr == 10) {
       if (OnVisPowerComputed) {
-        OnVisPowerComputed();
+        OnVisPowerComputed(VisPower, 2048, 6);
       }
       ptr = 0;
     }
