@@ -6,6 +6,7 @@
 #include <fftw3.h>
 
 #include "common.h"
+#include "gui.h"
 
 /* Handle selection of the VIS mode in the GUI */
 static void onGotVis(guchar VIS) {
