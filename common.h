@@ -13,9 +13,6 @@ extern gboolean   ManualActivated;
 extern gboolean   ManualResync;
 extern guchar    *StoredLum;
 extern pthread_t  thread1;
-extern guchar     VISmap[];
-
-#define VIS_PARITY_ODD	(1 << 7)
 
 typedef struct _FFTStuff FFTStuff;
 struct _FFTStuff {
@@ -107,22 +104,6 @@ enum {
 enum {
   GBR, RGB, YUV, BW
 };
-
-typedef struct ModeSpec {
-  char   *Name;
-  char   *ShortName;
-  double  SyncTime;
-  double  PorchTime;
-  double  SeptrTime;
-  double  PixelTime;
-  double  LineTime;
-  gushort ImgWidth;
-  gushort NumLines;
-  guchar  LineHeight;
-  guchar  ColorEnc;
-} _ModeSpec;
-
-extern _ModeSpec ModeSpec[];
 
 double   power     (fftw_complex coeff);
 guchar   clip          (double a);

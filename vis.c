@@ -7,6 +7,7 @@
 
 #include "common.h"
 #include "gui.h"
+#include "modespec.h"
 
 /* Handle selection of the VIS mode in the GUI */
 static void onGotVis(guchar VIS) {
