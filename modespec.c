@@ -27,7 +27,7 @@
  *             <http://www.tima.com/~djones/line.txt>
  */
 
-_ModeSpec ModeSpec[] = {
+const _ModeSpec ModeSpec[] = {
 
   [M1] = {  // N7CXI, 2000
     .Name         = "Martin M1",
@@ -381,7 +381,7 @@ _ModeSpec ModeSpec[] = {
 
 //                  0     1     2     3    4     5     6     7     8     9     A     B     C    D    E     F
 
-guchar VISmap[] = {
+const uint8_t VISmap[] = {
                     // Normal (even) parity
                     0,    0,    R8BW, 0,   R24,  0,    0,    0,    R36,  0,    R24BW,0,    R72, 0,   0,    0,     // 0
                     0,    0,    0,    0,   0,    0,    0,    0,    0,    0,    0,    0,    0,   0,   0,    0,     // 1
