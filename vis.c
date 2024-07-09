@@ -10,6 +10,7 @@
 #include "gui.h"
 #include "modespec.h"
 #include "pcm.h"
+#include "pic.h"
 
 /* Handle selection of the VIS mode in the GUI */
 static void onGotVis(guchar VIS) {
