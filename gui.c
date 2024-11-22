@@ -45,6 +45,8 @@ void createGUI() {
   gui.button_clear    = GTK_WIDGET(gtk_builder_get_object(builder,"button_clear"));
   gui.button_start    = GTK_WIDGET(gtk_builder_get_object(builder,"button_start"));
   gui.combo_card      = GTK_WIDGET(gtk_builder_get_object(builder,"combo_card"));
+  gui.combo_rate      = GTK_WIDGET(gtk_builder_get_object(builder,"combo_rate"));
+  gui.combo_channel   = GTK_WIDGET(gtk_builder_get_object(builder,"combo_channel"));
   gui.combo_mode      = GTK_WIDGET(gtk_builder_get_object(builder,"combo_mode"));
   gui.entry_picdir    = GTK_WIDGET(gtk_builder_get_object(builder,"entry_picdir"));
   gui.eventbox_img    = GTK_WIDGET(gtk_builder_get_object(builder,"eventbox_img"));
@@ -77,6 +79,8 @@ void createGUI() {
   g_signal_connect        (gui.button_clear,  "clicked",      G_CALLBACK(evt_clearPix),      NULL);
   g_signal_connect        (gui.button_start,  "clicked",      G_CALLBACK(evt_ManualStart),   NULL);
   g_signal_connect        (gui.combo_card,    "changed",      G_CALLBACK(evt_changeDevices), NULL);
+  g_signal_connect        (gui.combo_rate,    "changed",      G_CALLBACK(evt_changeDevices), NULL);
+  g_signal_connect        (gui.combo_channel, "changed",      G_CALLBACK(evt_changeDevices), NULL);
   g_signal_connect        (gui.eventbox_img,  "button-press-event",G_CALLBACK(evt_clickimg),     NULL);
   g_signal_connect        (gui.menuitem_quit, "activate",     G_CALLBACK(evt_deletewindow),  NULL);
   g_signal_connect        (gui.menuitem_about,"activate",     G_CALLBACK(evt_show_about),    NULL);
@@ -295,6 +299,9 @@ static void evt_AbortRx() {
 static void evt_changeDevices() {
 
   int status;
+  unsigned long rate;
+  unsigned char channel;
+  gchar* str;
 
   pcm.BufferDrop = FALSE;
   Abort = TRUE;
@@ -306,11 +313,23 @@ static void evt_changeDevices() {
 
   if (pcm.handle != NULL) snd_pcm_close(pcm.handle);
 
-  /*
-   * Choose 44.1kHz and left channel, to preserve current default behaviour.
-   * TODO: add UI elements to let the user choose.
-   */
-  status = initPcmDevice(gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(gui.combo_card)), 44100, PCM_CH_LEFT);
+  str = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(gui.combo_channel));
+  switch(str[0]) {
+    case 'L': channel = PCM_CH_LEFT;
+              break;
+    case 'R': channel = PCM_CH_RIGHT;
+              break;
+    default:
+    case 'M': channel = PCM_CH_MONO;
+              break;
+  }
+  g_free(str);
+
+  str = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(gui.combo_rate));
+  rate = strtoul(str, NULL, 10);
+  g_free(str);
+
+  status = initPcmDevice(gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(gui.combo_card)), rate, channel);
 
 
   switch(status) {
@@ -320,7 +339,7 @@ static void evt_changeDevices() {
       break;
     case -1:
       gtk_image_set_from_stock(GTK_IMAGE(gui.image_devstatus),GTK_STOCK_DIALOG_WARNING,GTK_ICON_SIZE_SMALL_TOOLBAR);
-      gtk_widget_set_tooltip_text(gui.image_devstatus, "Device was opened, but doesn't support 44100 Hz");
+      gtk_widget_set_tooltip_text(gui.image_devstatus, "Device was opened, but doesn't support selected sample rate");
       break;
     case -2:
       gtk_image_set_from_stock(GTK_IMAGE(gui.image_devstatus),GTK_STOCK_DIALOG_ERROR,GTK_ICON_SIZE_SMALL_TOOLBAR);

@@ -15,6 +15,8 @@ struct _GuiObjs {
   GtkWidget *button_clear;
   GtkWidget *button_start;
   GtkWidget *combo_card;
+  GtkWidget *combo_rate;
+  GtkWidget *combo_channel;
   GtkWidget *combo_mode;
   GtkWidget *entry_picdir;
   GtkWidget *eventbox_img;
