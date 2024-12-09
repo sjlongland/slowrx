@@ -204,7 +204,22 @@ _ModeSpec ModeSpec[] = {
     .NumLines     = 120,
     .LineHeight   = 2,
     .ColorEnc     = BW },
-  
+
+  [W260] = {
+    // Reverse-engineered by taking half the W2120 pixel time as an educated guess then
+    // tweaking the generated image timings until QSSTV decoded them without slant. -- VK4MSL
+    .Name         = "Wraase SC-2 60",
+    .ShortName    = "W260",
+    .SyncTime     = 5.5225e-3,
+    .PorchTime    = 0.0e-3,
+    .SeptrTime    = 0.5e-3,
+    .PixelTime    = 0.2425859375e-3,
+    .LineTime     = 240.405e-3,
+    .ImgWidth     = 320,
+    .NumLines     = 256,
+    .LineHeight   = 1,
+    .ColorEnc     = RGB },
+
   [W2120] = { // KB4YZ, 1999
     .Name         = "Wraase SC-2 120",
     .ShortName    = "W2120",
@@ -387,7 +402,7 @@ guchar VISmap[] = {
                     0,    0,    0,    0,   0,    0,    R12BW,0,    0,    0,    0,    0,    0,   0,   0,    0,     // 8
                     0,    0,    0,    0,   0,    0,    0,    0,    0,    0,    0,    0,    0,   0,   0,    0,     // 9
                     0,    0,    0,    0,   0,    0,    0,    0,    0,    0,    0,    0,    0,   0,   0,    0,     // A
-                    0,    0,    0,    0,   0,    0,    0,    0,    0,    0,    0,    0,    0,   0,   0,    0,     // B
+                    0,    0,    0,    0,   0,    0,    0,    0,    0,    0,    0,    W260, 0,   0,   0,    0,     // B
                     0,    0,    0,    0,   0,    0,    0,    0,    0,    0,    0,    0,    0,   0,   0,    0,     // C
                     0,    0,    0,    0,   0,    0,    0,    0,    0,    0,    0,    0,    0,   0,   0,    0,     // D
                     0,    0,    0,    0,   0,    0,    0,    0,    0,    0,    0,    0,    0,   0,   0,    0,     // E
