@@ -15,6 +15,8 @@ extern guchar    *StoredLum;
 extern pthread_t  thread1;
 extern guchar     VISmap[];
 
+#define VIS_PARITY_ODD	(1 << 7)
+
 typedef struct _FFTStuff FFTStuff;
 struct _FFTStuff {
   double       *in;
