@@ -1228,6 +1228,9 @@ int main(int argc, char *argv[]) {
             sample_rate = rate;
           }
           break;
+        case 'p': // PCM device
+          pcm_device = strdup(optarg);
+          break;
         case 'x': // Execute script on event
           rx_exec = strdup(optarg);
           break;
