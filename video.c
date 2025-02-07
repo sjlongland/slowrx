@@ -133,7 +133,6 @@ _Bool GetVideo(uint8_t Mode, double Rate, int32_t Skip, _Bool Redraw) {
     case R8BW:
       NumChans = 1;
       break;
-    case R24:
     case R36:
       NumChans = 2;
       break;
@@ -205,7 +204,7 @@ _Bool GetVideo(uint8_t Mode, double Rate, int32_t Skip, _Bool Redraw) {
       for (Channel = 0; Channel < NumChans; Channel++) {
         for (x = 0; x < ModeSpec[Mode].ImgWidth; x++) {
           
-          if (Mode == R36 || Mode == R24) {
+          if (Mode == R36) {
             if (Channel == 1) {
               if (y % 2 == 0)
                 PixelGrid[PixelIdx].Channel = 1;
@@ -436,7 +435,7 @@ _Bool GetVideo(uint8_t Mode, double Rate, int32_t Skip, _Bool Redraw) {
         VideoImage[x][y][Channel] = StoredLum[SampleNum];
 
         // Some modes have R-Y & B-Y channels that are twice the height of the Y channel
-        if (Channel > 0 && (Mode == R36 || Mode == R24))
+        if (Channel > 0 && Mode == R36)
           VideoImage[x][y+1][Channel] = StoredLum[SampleNum];
 
         // Calculate and draw pixels to pixbuf on line change
