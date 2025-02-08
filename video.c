@@ -79,6 +79,7 @@ _Bool GetVideo(uint8_t Mode, double Rate, int32_t Skip, _Bool Redraw) {
   switch (Mode) {
 
     case R72:
+    case R24:
       ChanLen[0]   = ModeSpec[Mode].PixelTime * ModeSpec[Mode].ImgWidth * 2;
       ChanLen[1]   = ChanLen[2] = ModeSpec[Mode].PixelTime * ModeSpec[Mode].ImgWidth;
       ChanStart[0] = ModeSpec[Mode].SyncTime + ModeSpec[Mode].PorchTime;
@@ -87,7 +88,6 @@ _Bool GetVideo(uint8_t Mode, double Rate, int32_t Skip, _Bool Redraw) {
       break;
 
     case R36:
-    case R24:
       ChanLen[0]   = ModeSpec[Mode].PixelTime * ModeSpec[Mode].ImgWidth * 2;
       ChanLen[1]   = ChanLen[2] = ModeSpec[Mode].PixelTime * ModeSpec[Mode].ImgWidth;
       ChanStart[0] = ModeSpec[Mode].SyncTime + ModeSpec[Mode].PorchTime;
