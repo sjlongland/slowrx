@@ -146,17 +146,17 @@ const _ModeSpec ModeSpec[] = {
     .LineHeight   = 1,
     .ColorEnc     = YUV },
 
-  [R24] = {  // N7CXI, 2000
+  [R24] = {  // N7CXI, 2000, W5FUR, 2025 :3c
     .Name         = "Robot 24",
     .ShortName    = "R24",
-    .SyncTime     = 9e-3,
-    .PorchTime    = 3e-3,
-    .SeptrTime    = 6e-3,
-    .PixelTime    = 0.1375e-3,
-    .LineTime     = 150e-3,
+    .SyncTime     = 6e-3,
+    .PorchTime    = 2e-3,
+    .SeptrTime    = 4e-3,
+    .PixelTime    = 0.14375e-3,
+    .LineTime     = 200e-3,
     .ImgWidth     = 320,
-    .NumLines     = 240,
-    .LineHeight   = 1,
+    .NumLines     = 120,
+    .LineHeight   = 2,
     .ColorEnc     = YUV },
 
   [R24BW] = {  // N7CXI, 2000
